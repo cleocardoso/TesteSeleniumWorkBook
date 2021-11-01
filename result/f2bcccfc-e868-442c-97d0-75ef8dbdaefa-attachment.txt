@@ -1,0 +1,1 @@
+RESULT ->  Email já existente para um usuário!
