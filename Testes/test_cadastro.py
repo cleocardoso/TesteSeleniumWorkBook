@@ -421,7 +421,7 @@ class TestCadastro(unittest.TestCase):
 
 
         result = driver.find_element_by_class_name('alert-success').text
-        print("RESULT -> ",result)
+
 
         assert "Usuário Registrado com Sucesso!" in result
 
