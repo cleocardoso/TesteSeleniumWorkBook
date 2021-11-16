@@ -390,7 +390,14 @@ def __generate__email__(value):
     return value.lower() + __utils__(dominios)
 
 
-def __generate__():
+def __generate__password__(value, is_valid):
+    password = "@" + value.lower()
+    if len(password) < 6 and is_valid:
+        password += __generate__name__()
+    return password
+
+
+def __generate__(is_valid_password=False):# esse False eh o valor default da funcao
     name = __generate__name__()
     last_name = __generate__name__last__()
     objCity = __generate__city__()
@@ -399,7 +406,7 @@ def __generate__():
         "last_name": last_name,  # segundo nome
         "name_complete": name.capitalize() + " " + last_name,  # nome completo
         "email": __generate__email__(name),  # email
-        "password": "@" + name.lower(),  # senha
+        "password": __generate__password__(value=name, is_valid=is_valid_password),  # senha
         "username": name.lower(),  # username
         "city": objCity['city'],  # cidade
         "uf": objCity['uf'],  # UF

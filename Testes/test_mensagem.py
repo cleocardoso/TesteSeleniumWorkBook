@@ -6,16 +6,16 @@ import time
 
 import requests
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+
 from selenium.webdriver.common.keys import Keys
 
 
-class TestAvaliarProfissional(unittest.TestCase):
+class TestMensagens(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
-    @allure.testcase("Testando visualizar avaliacoes profissional vazio")
-    def test_visualizar_avaliacoes_profissional_vazio(self):
+    @allure.testcase("Testando enviar mensagem")
+    def test_enviar_mensagem_profissional(self):
         driver = self.driver
         driver.get("https://workbook-teste.herokuapp.com/submit_login/")
 
@@ -32,13 +32,19 @@ class TestAvaliarProfissional(unittest.TestCase):
         time.sleep(2)
         driver.forward()
         driver.find_element_by_xpath('/html/body/main/div[1]/div/div/div/div/a').click()
-        driver.find_element_by_xpath('/html/body/main/div[3]/div/div/div/div/div[1]/div/div[2]/a').click()
+        driver.find_element_by_xpath('//*[@id="enviar-mensagem-perfil"]').click()
 
         time.sleep(2)
         driver.forward()
-        result = driver.find_element_by_xpath('/html/body/main/div[2]/div/div').text
+        driver.find_element_by_xpath('//*[@id="enviar-mensagem-perfil"]').click()
+        time.sleep(2)
+        driver.forward()
+        time.sleep(2)
+        driver.find_element_by_name("texto").send_keys("Boa tarde")
+        time.sleep(2)
+        #driver.find_element_by_xpath('//*[@id="direct-chat-footer"]/div/span/button').click()
 
-        print("RESULT--->", result)
+        #result = driver.find_element_by_class_name('direct-chat-text').text
+        #print("RESULT--->", result)
 
-        assert "Nenhuma Avaliação encontrada!" in result
-
+        #assert "Boa tarde" in result
