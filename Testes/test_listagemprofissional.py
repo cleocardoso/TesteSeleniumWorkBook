@@ -17,9 +17,9 @@ class TestListagemProfissional(unittest.TestCase):
     @allure.testcase("Testando o Campos buscar profissional valido")
     def test_buscar_profissional_valido(self):
         driver = self.driver
-        driver.get("https://workbook-teste.herokuapp.com/submit_login/")
+        driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -28,7 +28,7 @@ class TestListagemProfissional(unittest.TestCase):
 
         driver.forward()
         current = driver.current_url  # ele recebe essa rota /listarProfissional
-        driver.find_element_by_name("termo").send_keys("teste")
+        driver.find_element_by_name("termo").send_keys("manicure")
         driver.find_element_by_name("termo").send_keys(Keys.RETURN)
 
         driver.forward()  # a troca acontece aqui
@@ -36,14 +36,15 @@ class TestListagemProfissional(unittest.TestCase):
         # result = driver.find_element_by_class_name('card-columns').text
 
         # assert "manicure" in result
-        assert current not in driver.current_url  # e essa recebe aquele buscar?termo
+        #assert current not in driver.current_url  # e essa recebe  buscar termo
+        self.assertTrue(current not in driver.current_url)
 
     @allure.testcase("Testando o Campos buscar profissional nao encontrado")
     def test_listar_profissional_invalido(self):
         driver = self.driver
-        driver.get("https://workbook-teste.herokuapp.com/submit_login/")
+        driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -57,14 +58,15 @@ class TestListagemProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        assert "Profissional não encontrado!" in result
+        #assert "Profissional não encontrado!" in result
+        self.assertTrue("Profissional não encontrado!" in result)
 
     @allure.testcase("Testando o Campos buscar profissional vazio")
     def test_listar_profissional_vazio(self):
         driver = self.driver
-        driver.get("https://workbook-teste.herokuapp.com/submit_login/")
+        driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -78,18 +80,20 @@ class TestListagemProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        assert "Campo não pode ser vazio!" in result
+        #assert "Campo não pode ser vazio!" in result
+        self.assertTrue("Campo não pode ser vazio!" in result)
 
     @allure.testcase("Testando visualizar dados do profissional valido")
     def test_dados_profissional_valido(self):
         driver = self.driver
-        driver.get("https://workbook-teste.herokuapp.com/submit_login/")
+        driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
         time.sleep(2)
+
         driver.forward()
 
         driver.find_element_by_name("termo").send_keys("manicure")
@@ -100,13 +104,7 @@ class TestListagemProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('/html/body/main/div[1]/div/h1').text
 
-        assert "Informações Profissionais" in result
+        #assert "Informações Profissionais" in result
+        self.assertTrue("Informações Profissionais" in result)
 
-    @allure.testcase("Testando visualizar dados do profissional invalido")
-    def test_dados_profissional_invalido(self):
-        driver = self.driver
-        driver.get("https://workbook-teste.herokuapp.com/exemple")
-        text = driver.title
-        print('text ', text)
-        # assert "Informações Profissionais" in result
-        assert text.upper().find("Page not found".upper()) > -1
+
