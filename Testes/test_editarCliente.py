@@ -192,3 +192,10 @@ class TestEditarDadosCliente(unittest.TestCase):
         #print("Result====>", result)
 
         self.assertTrue("Este campo é obrigatório." in result)
+
+    def tearDown(self):
+        self.driver.close()
+
+
+if __name__ == '__main__':
+        unittest.main()
