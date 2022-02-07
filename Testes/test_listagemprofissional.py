@@ -15,7 +15,7 @@ class TestListagemProfissional(unittest.TestCase):
         self.driver = webdriver.Chrome()
 
     @allure.testcase("Testando o Campos buscar profissional valido")
-    def test_buscar_profissional_valido(self):
+    def test_listar_profissional_valido(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
@@ -107,4 +107,9 @@ class TestListagemProfissional(unittest.TestCase):
         #assert "Informações Profissionais" in result
         self.assertTrue("Informações Profissionais" in result)
 
+    def tearDown(self):
+        self.driver.close()
 
+
+if __name__ == '__main__':
+        unittest.main()
