@@ -304,8 +304,8 @@ class TestCadastro(unittest.TestCase):
         #assert "Email já existente para um usuário!" in result
         self.assertTrue("Email já existente para um usuário!" in result)
 
-    @allure.testcase("Testando o Campo email tamamho max de 254")
-    def test_cadastro_campo_nome_tamanho(self):
+    @allure.testcase("Testando o Campo email com caractere especial")
+    def test_cadastro_campo_email_com_espaco(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/cadastro/")
         self.assertIn("WorkBook", driver.title)
@@ -323,7 +323,91 @@ class TestCadastro(unittest.TestCase):
         # Preencher nome
         driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
         # Preencher email
-        driver.find_element_by_xpath('//*[@id="email"]').send_keys("f", * 255,"@gmail.com")
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys("téte@gmail.com")
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-danger').text
+        print("Resultado---->", result)
+        # assert "Email já existente para um usuário!" in result
+        self.assertTrue("Email não pode conter caracteres especial" in result)
+
+    @allure.testcase("Testando o Campo email com espaço")
+    def test_cadastro_campo_email_com_espaco(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        senha = obj['password']
+        telefone = obj['phone']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys("t1 @gmail.com")
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-danger').text
+        print("Resultado---->", result)
+        # assert "Email já existente para um usuário!" in result
+        self.assertTrue("Email não pode conter espaço." in result)
+
+    @allure.testcase("Testando o Campo email tamamho max de 254")
+    def test_cadastro_campo_email_tamanho(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        senha = obj['password']
+        telefone = obj['phone']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys("f" * 255 + "@gmail.com")
         # Preencher telefone
         driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
         # Preencher cidade
@@ -344,7 +428,7 @@ class TestCadastro(unittest.TestCase):
         result = driver.find_element_by_class_name('alert-success').text
         print("RESULT -> ", result)
         # assert "Informe outro nome de usuário!" in result
-        #self.assertTrue("Esse campo so aceita no maximo 254 caracteres." in result)
+        self.assertTrue("Esse campo so aceita no maximo 254 caracteres." in result)
 
     @allure.testcase("Testando o Campo telefone tamamho max de 11")
     def test_cadastro_campo_telefone_tamanho(self):
