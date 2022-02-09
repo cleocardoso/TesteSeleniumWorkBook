@@ -1,10 +1,10 @@
 import unittest
+from datetime import datetime
 
 import allure
 import time
 
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
 
@@ -37,17 +37,27 @@ class TestMensagem(unittest.TestCase):
 
         time.sleep(2)  # ele vai pausar por 2 segundos
         driver.forward()
-        driver.find_element_by_xpath('//*[@id="direct-chat-footer"]/div/input').send_keys("oi")
+        time.sleep(2)
+        msgEntrada = "teste"
+        driver.find_element_by_xpath('//*[@id="direct-chat-footer"]/div/input').send_keys(msgEntrada)
         driver.find_element_by_xpath('//*[@id="direct-chat-footer"]/div/span/button').click()
+        time.sleep(2)
+        elementos = driver.find_element_by_xpath('//*[@id="direct-chat"]').find_elements_by_class_name('direct-chat-msg')
+        tamanho = len(elementos)-1
+        elemento= elementos[tamanho]
+        array = elemento.find_elements_by_tag_name('div')
+        if len(array) > 0:
+            elms = array[0].find_elements_by_tag_name('span')
+            dataSaida = elms[1].text
+            msgSaida = array[1].text
 
-        msg = driver.find_element_by_xpath('//*[@id="direct-chat"]/div[3]/div[2]').text
-        data = driver.find_element_by_xpath('//*[@id="direct-chat"]/div[3]/div[1]/span[2]').text
+        resultEntrada= msgEntrada + datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        resultSaida = msgSaida + dataSaida
 
-        result = msg + data
+        #print("resultado Entrada=>>>", resultEntrada)
+        #print("resultado saida=>>>", resultSaida)
 
-        print("resultado=>>>", result)
-
-        self.assertTrue("oi" + "07/02/2022" in result)
+        self.assertTrue(resultEntrada in resultSaida)
 
     def tearDown(self):
         self.driver.close()
