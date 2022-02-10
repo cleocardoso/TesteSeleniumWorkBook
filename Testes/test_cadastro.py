@@ -430,7 +430,7 @@ class TestCadastro(unittest.TestCase):
         # assert "Informe outro nome de usuário!" in result
         self.assertTrue("Esse campo so aceita no maximo 254 caracteres." in result)
 
-    @allure.testcase("Testando o Campo telefone tamamho max de 11")
+    @allure.testcase("Testando o Campo telefone tamamho max de 15")
     def test_cadastro_campo_telefone_tamanho(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/cadastro/")
@@ -451,7 +451,7 @@ class TestCadastro(unittest.TestCase):
         # Preencher email
         driver.find_element_by_xpath('//*[@id="email"]').send_keys(email)
         # Preencher telefone
-        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(9999999999999)
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(999999999999999999999999)
         # Preencher cidade
         driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
         # Preencher rua
@@ -470,7 +470,7 @@ class TestCadastro(unittest.TestCase):
         result = driver.find_element_by_class_name('alert-success').text
         print("RESULT -> ", result)
 
-        self.assertTrue("Informe no máximo 11 números." in result)
+        self.assertTrue("Informe no máximo 15 números." in result)
 
     @allure.testcase("Testando o Campo telefone inserindo caracteres")
     def test_cadastro_campo_telefone_inserindo_caractere(self):
