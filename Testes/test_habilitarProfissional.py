@@ -72,6 +72,8 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         self.assertTrue("Preencha os campos!" in result)
 
+
+
     def tearDown(self):
         self.driver.close()
 
