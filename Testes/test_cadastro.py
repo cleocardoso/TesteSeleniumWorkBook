@@ -597,6 +597,174 @@ class TestCadastro(unittest.TestCase):
 
         self.assertTrue("Esse campo so aceita no maximo 128 caracteres." in result)
 
+    @allure.testcase("Testando o Campo usuario tamamho minimo de 1 caractere")
+    def test_cadastro_campo_usuario_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        senha = obj['password']
+        telefone = obj['phone']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("t")
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys(email)
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-success').text
+        #print("RESULT -> ", result)
+        # assert "Informe outro nome de usuário!" in result
+        self.assertTrue("Usuário Registrado com Sucesso!" in result)
+
+    @allure.testcase("Testando o Campo nome tamamho minimo de 1 caractere")
+    def test_cadastro_campo_nome_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        senha = obj['password']
+        telefone = obj['phone']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys("r")
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys(email)
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-success').text
+        # print("RESULT -> ", result)
+        # assert "Informe outro nome de usuário!" in result
+        self.assertTrue("Usuário Registrado com Sucesso!" in result)
+
+    @allure.testcase("Testando o Campo email tamamho minimo de 1 caractere") #não e possivel testar
+    def test_cadastro_campo_nome_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        senha = obj['password']
+        telefone = obj['phone']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys("a")
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-danger').text
+        # print("RESULT -> ", result)
+        # assert "Informe outro nome de usuário!" in result
+        self.assertTrue("Email incompleto!" in result)
+
+    @allure.testcase("Testando o Campo senha minimo 1 caractere")
+    def test_cadastro_campo_senha_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/cadastro/")
+        self.assertIn("WorkBook", driver.title)
+        obj = __generate__()
+        nome = obj['username']
+        email = obj['email']
+        cidade = obj['city']
+        rua = obj['road']
+        uf = obj['uf']
+        bairro = obj['district']
+        telefone = obj['phone']
+        senha = obj['password']
+        # Preencher usuario
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
+        # Preencher nome
+        driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
+        # Preencher email
+        driver.find_element_by_xpath('//*[@id="email"]').send_keys(email)
+        # Preencher telefone
+        driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
+        # Preencher cidade
+        driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
+        # Preencher rua
+        driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
+        # Preencher uf
+        driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
+        # Preencher bairro
+        driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
+        # Preencher senha
+        driver.find_element_by_xpath('//*[@id="senha"]').send_keys("1")
+        # Preencher confirmar senha
+        driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
+        # botao
+        driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
+
+        result = driver.find_element_by_class_name('alert-danger').text
+
+        # assert "Senha precisa ter pelo menos 6 Caracteres!" in result
+        self.assertTrue("Senha precisa ter pelo menos 6 Caracteres!" in result)
+
     def tearDown(self):
         self.driver.close()
 
