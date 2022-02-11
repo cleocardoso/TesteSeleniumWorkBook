@@ -252,6 +252,66 @@ class TestEditarDadosCliente(unittest.TestCase):
 
         self.assertTrue("Informe menos de 150 caracteres" in result)
 
+    @allure.testcase("Testando o Editar dados com campo usuario com minimo 1 caractere")
+    def test_cadastro_editar_usuario_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/submit_login/")
+
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
+        driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
+
+        driver.find_element_by_xpath('//*[@id="submit_login"]').click()
+        time.sleep(2)
+        driver.forward()
+
+        time.sleep(2)
+        driver.find_element_by_xpath('/html/body/aside/ul/li[4]/a/span').click()
+
+        driver.forward()
+        driver.find_element_by_xpath('/html/body/main/div[2]/div/div/div/div/div[2]/div/a').click()
+
+        driver.forward()
+        driver.find_element_by_xpath('//*[@id="id_username"]').clear()
+        driver.find_element_by_xpath('//*[@id="id_username"]').send_keys("a")
+
+        driver.find_element_by_xpath('/html/body/main/div[2]/div[1]/div/div/div/form/div[11]/div/button').click()
+
+        result = driver.find_element_by_xpath('//*[@id="error_1_id_username"]/strong').text
+
+        # print("Result====>", result)
+
+        self.assertTrue("Dados alterados com sucesso" in result)
+
+    @allure.testcase("Testando o Editar dados com campo nome com minimo 1 caractere")
+    def test_cadastro_editar_nome_tamanho_min(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/submit_login/")
+
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
+        driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
+
+        driver.find_element_by_xpath('//*[@id="submit_login"]').click()
+        time.sleep(2)
+        driver.forward()
+
+        time.sleep(2)
+        driver.find_element_by_xpath('/html/body/aside/ul/li[4]/a/span').click()
+
+        driver.forward()
+        driver.find_element_by_xpath('/html/body/main/div[2]/div/div/div/div/div[2]/div/a').click()
+
+        driver.forward()
+        driver.find_element_by_xpath('//*[@id="id_first_name"]').clear()
+        driver.find_element_by_xpath('//*[@id="id_first_name"]').send_keys("a")
+
+        driver.find_element_by_xpath('/html/body/main/div[2]/div[1]/div/div/div/form/div[11]/div/button').click()
+
+        result = driver.find_element_by_xpath('//*[@id="error_1_id_username"]/strong').text
+
+        # print("Result====>", result)
+
+        self.assertTrue("Dados alterados com sucesso" in result)
+
     def tearDown(self):
         self.driver.close()
 
