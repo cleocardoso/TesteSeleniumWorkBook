@@ -1,15 +1,13 @@
 import unittest
-
+import pytest
 import allure
 import time
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-
-class TestAvaliarProfissional(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome()
+@pytest.mark.usefixtures("setup")
+class TestAvaliarProfissional:
 
     @allure.testcase("Avaliar Profissional valido")#não foi possivel realizar
     def test_Avaliar_profissional_valido(self):
@@ -39,7 +37,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     @allure.testcase("Avaliar Profissional campo descrição vazio")
     def test_Avaliar_profissional_descrição_vazio(self):
@@ -69,7 +67,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     @allure.testcase("Testando visualizar avaliacoes profissional ")
     def test_visualizar_avaliacoes_profissional(self):
@@ -91,7 +89,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         # print("RESULT--->", result)
 
-        self.assertTrue("Nenhuma Avaliação encontrada!" is not result)
+        assert("Nenhuma Avaliação encontrada!" is not result)
 
     @allure.testcase("Testando visualizar avaliacoes profissional vazio")
     def test_visualizar_avaliacoes_profissional_vazio(self):
@@ -113,7 +111,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         #print("RESULT--->", result)
 
-        self.assertTrue("Nenhuma Avaliação encontrada!" in result)
+        assert("Nenhuma Avaliação encontrada!" in result)
 
     @allure.testcase("Avaliar Profissional nota minima")  # não foi possivel realizar
     def test_Avaliar_profissional_nota_min(self):
@@ -143,7 +141,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     @allure.testcase("Avaliar Profissional nota maxima")  # não foi possivel realizar
     def test_Avaliar_profissional_nota_max(self):
@@ -173,7 +171,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     @allure.testcase("Avaliar Profissional descricao minima")  # não foi possivel realizar
     def test_Avaliar_profissional_descricao_min(self):
@@ -203,7 +201,7 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     @allure.testcase("Avaliar Profissional descricao maxima")  # não foi possivel realizar
     def test_Avaliar_profissional_descricao_max(self):
@@ -233,14 +231,12 @@ class TestAvaliarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('')
 
-        self.assertTrue('Avaliação realizada com sucesso!')
+        assert('Avaliação realizada com sucesso!')
 
     def tearDown(self):
         self.driver.close()
 
 
-if __name__ == '__main__':
-    unittest.main()
 
 
 

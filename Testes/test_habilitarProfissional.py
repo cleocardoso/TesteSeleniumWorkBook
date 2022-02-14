@@ -1,18 +1,10 @@
-import random
-import unittest
-import webbrowser
 
+import pytest
 import allure
 import time
 
-import requests
-from selenium import webdriver
-
-
-class TestHabilitarProfissional(unittest.TestCase):
-
-    def setUp(self):
-        self.driver = webdriver.Chrome()
+@pytest.mark.usefixtures("setup")
+class TestHabilitarProfissional:
 
     @allure.testcase("Testando o Campos habilitar profissional valido")
     def test_habilitar_profissional_valido(self):
@@ -41,7 +33,7 @@ class TestHabilitarProfissional(unittest.TestCase):
         result = driver.find_element_by_class_name('alert-success').text
 
         #assert "Perfil profissional adicionado com sucesso!" in result
-        self.assertTrue("Perfil profissional adicionado com sucesso!" in result)
+        assert("Perfil profissional adicionado com sucesso!" in result)
 
     @allure.testcase("Testando o Campos habilitar profissional campos vazio")
     def test_habilitar_profissional_campos_vazio(self):
@@ -69,7 +61,7 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        self.assertTrue("Preencha os campos!" in result)
+        assert("Preencha os campos!" in result)
 
     @allure.testcase("Testando o Campos habilitar profissional campo profissão com no minimo 3 caracteres")
     def test_habilitar_profissional_campo_profissão_tamanho_min(self):
@@ -97,7 +89,7 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        self.assertTrue("Insira pelo menos 3 caracteres!" in result)
+        assert("Insira pelo menos 3 caracteres!" in result)
 
     @allure.testcase("Testando o Campos habilitar profissional campo descrição com no minimo 1 caracteres")
     def test_habilitar_profissional_campo_descrição_tamanho_min(self):
@@ -125,7 +117,7 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-success').text
 
-        self.assertTrue("Perfil profissional adicionado com sucesso!" in result)
+        assert("Perfil profissional adicionado com sucesso!" in result)
 
     @allure.testcase("Testando o Campos habilitar profissional campo profissão com no max 250")
     def test_habilitar_profissional_campo_profissão_tamanho_max(self):
@@ -153,7 +145,7 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        self.assertTrue("Informe menos de 250 caracteres" in result)
+        assert("Informe menos de 250 caracteres" in result)
 
     @allure.testcase("Testando o Campos habilitar profissional campo descrição com no max 250")
     def test_habilitar_profissional_campo_descricaoo_tamanho_max(self):
@@ -181,11 +173,9 @@ class TestHabilitarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_class_name('alert-danger').text
 
-        self.assertTrue("Informe menos de 250 caracteres" in result)
+        assert("Informe menos de 250 caracteres" in result)
 
     def tearDown(self):
         self.driver.close()
 
 
-if __name__ == '__main__':
-    unittest.main()

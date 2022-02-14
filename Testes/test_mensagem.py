@@ -3,14 +3,12 @@ from datetime import datetime
 
 import allure
 import time
-
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-
-class TestMensagem(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome()
+@pytest.mark.usefixtures("setup")
+class TestMensagem:
 
     @allure.testcase("Testando o enviar mensagem")
     def test_enviar_mensagem(self):
@@ -57,11 +55,9 @@ class TestMensagem(unittest.TestCase):
         #print("resultado Entrada=>>>", resultEntrada)
         #print("resultado saida=>>>", resultSaida)
 
-        self.assertTrue(resultEntrada in resultSaida)
+        assert(resultEntrada in resultSaida)
 
     def tearDown(self):
         self.driver.close()
 
 
-if __name__ == '__main__':
-    unittest.main()

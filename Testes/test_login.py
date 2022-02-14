@@ -1,7 +1,4 @@
-import random
-import unittest
-import webbrowser
-
+import pytest
 import allure
 import time
 
@@ -9,16 +6,15 @@ import requests
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
-class TestLogin(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome()
+@pytest.mark.usefixtures("setup")
+class TestLogin:
 
     @allure.testcase("Testando o login valido")
     def test_login_valido(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -32,9 +28,7 @@ class TestLogin(unittest.TestCase):
             print('Error')
 
         #assert "Login Efetuado Sucesso!" in result
-        self.assertTrue("Login Efetuado Sucesso!" in result)
-
-
+        assert("Login Efetuado Sucesso!" in result)
 
     @allure.testcase("Testando o login invalido")
     def test_login_invalido(self):
@@ -56,11 +50,9 @@ class TestLogin(unittest.TestCase):
             print('Error')
 
         #assert "Usuário ou senha inválido." in result2
-        self.assertTrue("Usuário ou senha inválido." in result2)
+        assert("Usuário ou senha inválido." in result2)
 
     def tearDown(self):
             self.driver.close()
 
 
-if __name__ == '__main__':
-        unittest.main()

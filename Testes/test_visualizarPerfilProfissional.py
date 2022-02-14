@@ -1,14 +1,13 @@
 import unittest
-
+import  pytest
 import allure
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+@pytest.mark.usefixtures("setup")
+class TestVisualizarProfissional:
 
-class TestVisualizarProfissional(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome()
 
     @allure.testcase("Testando visualizar dados do profissional valido") #testei pela tag da pagina
     def test_dados_profissional_visualizar(self):
@@ -31,14 +30,10 @@ class TestVisualizarProfissional(unittest.TestCase):
 
         result = driver.find_element_by_xpath('/html/body/main/div[1]/div/h1').text
 
-
-        self.assertTrue("Informações Profissionais" in result)
-
+        assert("Informações Profissionais" in result)
 
     def tearDown(self):
         self.driver.close()
 
 
 
-if __name__ == '__main__':
-    unittest.main()
