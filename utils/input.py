@@ -3,12 +3,7 @@ from selenium.webdriver.common.by import By
 
 def is__required(input=None):
     if input:
-        try:
-            required = input.get_attribute('required')
-            if required:
-                return True
-        except:
-            return False
+        return input
     return False
 
 
@@ -26,23 +21,26 @@ def get_attr(input=None, attr=''):
 
 
 def get__input_by_required(inputs=[], id=None):
-    elements = get__inputs(inputs)
-    if len(elements) == 0:
-        return None
-    for ele in elements:
-        if ele['id'] == id:
-            if ele['is_required'] is True:
-                return ele
-    return None
-
-
-def get__input_by_id(inputs=[], id=None):
-    elements = get__inputs(inputs)
+    elements = get__elements(inputs)
     if len(elements) == 0:
         return None
     for ele in elements:
         # print(ele)
         if ele['id'] == id:
+            if ele['is_required'] == 'true':
+                # print("AQUI==>",ele['is_required'])
+                return ele
+    return None
+
+
+def get__element_by_id(elements=[], id=None):
+    elements = get__elements(elements)
+    if len(elements) == 0:
+        return None
+    for ele in elements:
+        # print(ele)
+        if ele['id'] == id:
+            print("element ", ele, "\n")
             return ele
     return None
 
@@ -99,11 +97,15 @@ def find__inputs(driver):
     return driver.find_elements_by_tag_name("input")
 
 
+def find__by_elements(driver=None, tag_name=None):
+    return driver.find_elements_by_tag_name(tag_name)
+
+
 def find__inputs_by_xpath(driver):
     return driver.find_elements(By.XPATH, '//input')
 
 
-def get__inputs(inputs=[]):
+def get__elements(inputs=[]):
     if len(inputs) > 0:
         elements = []
         for i in inputs:

@@ -28,7 +28,7 @@ class TestLogin:
             print('Error')
 
         #assert "Login Efetuado Sucesso!" in result
-        assert("Login Efetuado Sucesso!" in result)
+        assert "Login Efetuado Sucesso!" in result
 
     @allure.testcase("Testando o login invalido")
     def test_login_invalido(self):
@@ -50,7 +50,7 @@ class TestLogin:
             print('Error')
 
         #assert "Usuário ou senha inválido." in result2
-        assert("Usuário ou senha inválido." in result2)
+        assert "Usuário ou senha inválido." in result2
 
     def tearDown(self):
             self.driver.close()

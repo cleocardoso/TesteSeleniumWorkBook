@@ -35,7 +35,7 @@ class TestListagemProfissional:
 
         # assert "manicure" in result
         #assert current not in driver.current_url  # e essa recebe  buscar termo
-        assert(current not in driver.current_url)
+        assert current not in driver.current_url
 
     @allure.testcase("Testando o Campos buscar profissional nao encontrado")
     def test_listar_profissional_invalido(self):
@@ -57,7 +57,7 @@ class TestListagemProfissional:
         result = driver.find_element_by_class_name('alert-danger').text
 
         #assert "Profissional não encontrado!" in result
-        assert("Profissional não encontrado!" in result)
+        assert "Profissional não encontrado!" in result
 
     @allure.testcase("Testando o Campos buscar profissional vazio")
     def test_listar_profissional_vazio(self):
@@ -79,7 +79,7 @@ class TestListagemProfissional:
         result = driver.find_element_by_class_name('alert-danger').text
 
         #assert "Campo não pode ser vazio!" in result
-        assert("Campo não pode ser vazio!" in result)
+        assert "Campo não pode ser vazio!" in result
 
     @allure.testcase("Testando visualizar dados do profissional valido")
     def test_dados_profissional_valido(self):
@@ -103,7 +103,7 @@ class TestListagemProfissional:
         result = driver.find_element_by_xpath('/html/body/main/div[1]/div/h1').text
 
         #assert "Informações Profissionais" in result
-        assert("Informações Profissionais" in result)
+        assert "Informações Profissionais" in result
 
     def tearDown(self):
         self.driver.close()
