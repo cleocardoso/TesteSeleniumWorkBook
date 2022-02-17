@@ -17,7 +17,7 @@ class TestListagemProfissional:
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -26,7 +26,7 @@ class TestListagemProfissional:
 
         driver.forward()
         current = driver.current_url  # ele recebe essa rota /listarProfissional
-        driver.find_element_by_name("termo").send_keys("manicure")
+        driver.find_element_by_name("termo").send_keys("Programador")
         driver.find_element_by_name("termo").send_keys(Keys.RETURN)
 
         driver.forward()  # a troca acontece aqui
@@ -42,14 +42,14 @@ class TestListagemProfissional:
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
         time.sleep(2)
         driver.forward()
 
-        driver.find_element_by_name("termo").send_keys("maria")
+        driver.find_element_by_name("termo").send_keys("Pedreiro")
         driver.find_element_by_name("termo").send_keys(Keys.RETURN)
 
         driver.forward()
@@ -64,7 +64,7 @@ class TestListagemProfissional:
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -81,29 +81,6 @@ class TestListagemProfissional:
         #assert "Campo não pode ser vazio!" in result
         assert "Campo não pode ser vazio!" in result
 
-    @allure.testcase("Testando visualizar dados do profissional valido")
-    def test_dados_profissional_valido(self):
-        driver = self.driver
-        driver.get("http://127.0.0.1:8000/submit_login/")
-
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste")
-        driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
-
-        driver.find_element_by_xpath('//*[@id="submit_login"]').click()
-        time.sleep(2)
-
-        driver.forward()
-
-        driver.find_element_by_name("termo").send_keys("manicure")
-        driver.find_element_by_name("termo").send_keys(Keys.RETURN)
-
-        driver.forward()
-        driver.find_element_by_xpath('/html/body/main/div[1]/div/div/div/div/a').click()
-
-        result = driver.find_element_by_xpath('/html/body/main/div[1]/div/h1').text
-
-        #assert "Informações Profissionais" in result
-        assert "Informações Profissionais" in result
 
     def tearDown(self):
         self.driver.close()

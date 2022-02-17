@@ -41,7 +41,7 @@ class TestHabilitarProfissional:
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("2")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -160,12 +160,12 @@ class TestHabilitarProfissional:
         # print("Result====>", result)
         assert is_valid is True
 
-    @allure.testcase("Testando o Campos habilitar profissional campo descrição com no max 250")
+    @allure.testcase("Testando o Campos habilitar profissional campo descrição com no max 250") #errooooooo funcao
     def test_habilitar_profissional_campo_descricaoo_tamanho_max(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("1")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -182,8 +182,8 @@ class TestHabilitarProfissional:
         # driver.find_element_by_xpath('//*[@id="id_imagem"]').send_keys("")
         driver.find_element_by_xpath('//*[@id="id_descricao"]').send_keys("aluas de ingles"  * 251)
 
-        inputs = find__inputs(driver=driver)
-        descricao = get__element_by_id(elements=inputs, id="id_descricao")
+        text_area = find__by_elements(driver=driver, tag_name='textarea')
+        descricao = get__element_by_id(elements=text_area, id='id_descricao')
         is_valid = is__valid_by_max_length(element=descricao, length=250) is True
         driver.find_element_by_xpath('//html/body/main/div[2]/div/div/div/div/form/div[5]/button').click()
 

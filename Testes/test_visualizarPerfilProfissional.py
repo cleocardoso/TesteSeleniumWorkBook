@@ -22,7 +22,7 @@ class TestVisualizarProfissional:
 
         driver.forward()
 
-        driver.find_element_by_name("termo").send_keys("manicure")
+        driver.find_element_by_name("termo").send_keys("Programador")
         driver.find_element_by_name("termo").send_keys(Keys.RETURN)
 
         driver.forward()
@@ -30,7 +30,7 @@ class TestVisualizarProfissional:
 
         result = driver.find_element_by_xpath('/html/body/main/div[1]/div/h1').text
 
-        assert("Informações Profissionais" in result)
+        assert "Informações Profissionais" in result
 
     def tearDown(self):
         self.driver.close()

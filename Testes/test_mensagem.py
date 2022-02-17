@@ -15,7 +15,7 @@ class TestMensagem:
         driver = self.driver
         driver.get("http://127.0.0.1:8000/submit_login/")
 
-        driver.find_element_by_xpath('//*[@id="username"]').send_keys("teste2")
+        driver.find_element_by_xpath('//*[@id="username"]').send_keys("21")
         driver.find_element_by_xpath('//*[@id="password"]').send_keys("123456")
 
         driver.find_element_by_xpath('//*[@id="submit_login"]').click()
@@ -49,13 +49,13 @@ class TestMensagem:
             dataSaida = elms[1].text
             msgSaida = array[1].text
 
-        resultEntrada= msgEntrada + datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        resultEntrada = msgEntrada + datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         resultSaida = msgSaida + dataSaida
 
-        #print("resultado Entrada=>>>", resultEntrada)
-        #print("resultado saida=>>>", resultSaida)
+        #print("resultado Entrada=>>>",resultEntrada[:21])
+        #print("resultado saida=>>>", resultSaida[:21])
 
-        assert(resultEntrada in resultSaida)
+        assert resultEntrada[:21] in resultSaida[:21]
 
     def tearDown(self):
         self.driver.close()

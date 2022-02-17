@@ -38,7 +38,7 @@ def get__element_by_id(elements=[], id=None):
     if len(elements) == 0:
         return None
     for ele in elements:
-        # print(ele)
+        print(ele)
         if ele['id'] == id:
             print("element ", ele, "\n")
             return ele
@@ -96,6 +96,9 @@ def is__valid_by_input_max_length(element, length):
 def find__inputs(driver):
     return driver.find_elements_by_tag_name("input")
 
+def find__inputs__textarea(driver):
+    return driver.find_elements_by_tag_name("textarea")
+
 
 def find__by_elements(driver=None, tag_name=None):
     return driver.find_elements_by_tag_name(tag_name)
@@ -119,3 +122,4 @@ def get__elements(inputs=[]):
             elements.append(input)
         return elements
     return []
+
