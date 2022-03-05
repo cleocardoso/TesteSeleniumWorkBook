@@ -11,7 +11,6 @@ from utils.input import find__inputs, get__elements, is__valid_by_required, get_
 @pytest.mark.usefixtures("setup")
 class TestCadastro:
 
-    @allure.testcase("Testando o Cadastrar valido")
     def test_cadastro_campos_validos(self):
         driver = self.driver
         driver.get("http://127.0.0.1:8000/cadastro/")
@@ -25,33 +24,21 @@ class TestCadastro:
         bairro = obj['district']
         senha = obj['password']
         telefone = obj['phone']
-        # Preencher usuario
+
         driver.find_element_by_xpath('//*[@id="username"]').send_keys(nome)
-        # Preencher nome
         driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(nome)
-        # Preencher email
         driver.find_element_by_xpath('//*[@id="email"]').send_keys(email)
-        # Preencher telefone
         driver.find_element_by_xpath('//*[@id="telefone"]').send_keys(telefone)
-        # Preencher cidade
         driver.find_element_by_xpath('//*[@id="cidade"]').send_keys(cidade)
-        # Preencher rua
         driver.find_element_by_xpath('//*[@id="rua"]').send_keys(rua)
-        # Preencher uf
         driver.find_element_by_xpath('//*[@id="uf"]').send_keys(uf)
-        # Preencher bairro
         driver.find_element_by_xpath('//*[@id="bairro"]').send_keys(bairro)
-        # Preencher senha
         driver.find_element_by_xpath('//*[@id="senha"]').send_keys(senha)
-        # Preencher confirmar senha
         driver.find_element_by_xpath('//*[@id="senha2"]').send_keys(senha)
-        # botao
         driver.find_element_by_xpath('//*[@id="show_class"]/div[11]/button').click()
         time.sleep(2)
         result = driver.find_element_by_class_name('alert-success').text
-        # print("result---->",result)
-        # assert "Usuário Registrado com Sucesso!" in result
-        assert ("Usuário Registrado com Sucesso!" in result)
+        assert "Usuário Registrado com Sucesso!" in result
 
     @allure.testcase("Testando o Cadastrar vazio")
     def test_cadastro_campos_vazio(self):
